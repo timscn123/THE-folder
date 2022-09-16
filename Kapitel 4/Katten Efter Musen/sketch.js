@@ -1,7 +1,9 @@
-let x,
-    y,
-    a,
-    b,
+let x, x1,
+    y, y1,
+    a, a1,
+    b, b1,
+    cX, cY,
+    cX1, cY1,
     d = 40,
     speed = 2;
 
@@ -17,16 +19,29 @@ function setup() {
  
   x = random(0, width);
   y = random(0, height);
+
+  x1 = random(0, width);
+  y1 = random(0, height);
   
   a = speed;
   b = 0;
+  a1 = -speed;
+  b1 = 0;
+
+  cX = x + d/2
+  cY= y + d/2
+  cX1 = x1 + d/2
+  cY1 = y1 + d/2
 }
 
 function draw() {
   background(30);
   image(img, x, y, d, d);
+  image(pac, x1, y1, d, d);
   x += speed * a;
   y += speed * b;
+  x1 += speed * a1;
+  y1 += speed * b1;
   borderCheck();
 }
 
@@ -47,6 +62,23 @@ function borderCheck() {
     a = 0;
     b = speed;
   }
+
+  if (x1 + d >= width) {
+    a1 = -speed;
+    b1 = 0;
+  }
+  if (x1 <= 0) {
+    a1 = speed;
+    b1 = 0;
+  }
+  if (y1 + d >= height) {
+    a1 = 0;
+    b1 = -speed;
+  }
+  if (y1 < 0) {
+    a1 = 0;
+    b1 = speed;
+  }
 }
 
 function keyPressed() {
@@ -66,23 +98,29 @@ function keyPressed() {
     b = 0;
     a = speed;
   }
+
+  if (keyCode === 83) {
+    b1 = speed;
+    a1 = 0;
+  }
+  if (keyCode === 87) {
+    b1 = -speed;
+    a1 = 0;
+  }
+  if (keyCode === 65) {
+    b1 = 0;
+    a1 = -speed;
+  }
+  if (keyCode === 68) {
+    b1 = 0;
+    a1 = speed;
+  }
 }
 
-function pacMove() {
-  if (keyIsDown(83)) {
-    b = speed;
-    a = 0;
+function collisionCheck() {
+  if (Math.sqrt((x1-x)^2 + (y1-y)^2) < d) {
+x = random(0, width);
+  y = random(0, height);
   }
-  if (keyIsDown(87)) {
-    b = -speed;
-    a = 0;
   }
-  if (keyIsDown(65)) {
-    b = 0;
-    a = -speed;
-  }
-  if (keyIsDown(68)) {
-    b = 0;
-    a = speed;
-  }
-}
+    
