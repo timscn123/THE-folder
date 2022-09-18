@@ -1,50 +1,57 @@
+//declares various variables and assign constants to d/diameter and speed
 let x, x1,
     y, y1,
     a, a1,
     b, b1,
-    cX, cY,
-    cX1, cY1,
     d = 40,
     speed = 2;
 
-//loads image
+//loads image for pacman and ghost
 function preload() {
   img = loadImage("ghost.webp");
   pac = loadImage("pac.png");
 }
 
-//creates canvas, randomizes starting position and sets speed
 function setup() {
+  //creates canvas
   createCanvas(windowWidth, windowHeight);
- 
+
+  //randomizes starting position for ghost and pacman
   x = random(0, width);
   y = random(0, height);
-
   x1 = random(0, width);
   y1 = random(0, height);
-  
+
+  //ssigns speed value to x and y movement for ghost and pacman
   a = speed;
   b = 0;
   a1 = -speed;
   b1 = 0;
 
-  cX = x + d/2
-  cY= y + d/2
-  cX1 = x1 + d/2
-  cY1 = y1 + d/2
+  //alerts player of controls
+  alert(
+    "Use WASD to control Pacman and use the arrows to control the ghost. Pacman chases and the ghost must flee."
+  );
 }
 
 function draw() {
+  //draws background and pacman and ghost on top using their x,y position
   background(30);
   image(img, x, y, d, d);
   image(pac, x1, y1, d, d);
+  
+  //updates x,y position variables for ghost and pacman using speed constant
   x += speed * a;
   y += speed * b;
   x1 += speed * a1;
   y1 += speed * b1;
+  
+  //runs borderCheck and collisionCheck functions
   borderCheck();
+  collisionCheck();
 }
 
+//function to check if the ghost/pacman is touching the edge of the canvas using their x,y position
 function borderCheck() {
   if (x + d >= width) {
     a = -speed;
@@ -81,6 +88,8 @@ function borderCheck() {
   }
 }
 
+
+//function to control pacman using WASD and ghost using arrows
 function keyPressed() {
   if (keyCode === DOWN_ARROW) {
     b = speed;
@@ -118,9 +127,15 @@ function keyPressed() {
 }
 
 function collisionCheck() {
-  if (Math.sqrt((x1-x)^2 + (y1-y)^2) < d) {
-x = random(0, width);
-  y = random(0, height);
+  //checks if the ghost is touching pacman using distance formula
+  if (sqrt((x - x1) * (x - x1) + (y - y1) * (y - y1)) < d) {
+
+    //resets player position and notifies them
+    x = random(0, width);
+    y = random(0, height);
+    x1 = random(0, width);
+    y1 = random(0, height);
+    alert("The ghost has been caught!");
   }
-  }
+}
     
