@@ -3,7 +3,8 @@ let x, x1,
     y, y1,
     a, a1,
     b, b1,
-    d = 40,
+    d = 60,
+    pacspeed = 2.6,
     speed = 2;
 
 //loads image for pacman and ghost
@@ -25,12 +26,12 @@ function setup() {
   //ssigns speed value to x and y movement for ghost and pacman
   a = speed;
   b = 0;
-  a1 = -speed;
-  b1 = 0;
+  a1 = -pacspeed;
+  b1 = pacspeed;
 
   //alerts player of controls
   alert(
-    "Use WASD to control Pacman and use the arrows to control the ghost. Pacman chases and the ghost must flee."
+    "Use the arrows to control the ghost. Pacman chases and the ghost must flee."
   );
 }
 
@@ -43,8 +44,8 @@ function draw() {
   //updates x,y position variables for ghost and pacman using speed constant
   x += speed * a;
   y += speed * b;
-  x1 += speed * a1;
-  y1 += speed * b1;
+  x1 += pacspeed * a1;
+  y1 += pacspeed * b1;
   
   //runs borderCheck and collisionCheck functions
   borderCheck();
@@ -72,18 +73,18 @@ function borderCheck() {
 
   if (x1 + d >= width) {
     a1 = -speed;
-    b1 = 0;
+    //b1 = 0;
   }
   if (x1 <= 0) {
     a1 = speed;
-    b1 = 0;
+    //b1 = 0;
   }
   if (y1 + d >= height) {
-    a1 = 0;
+    //a1 = 0;
     b1 = -speed;
   }
   if (y1 < 0) {
-    a1 = 0;
+    //a1 = 0;
     b1 = speed;
   }
 }
@@ -107,7 +108,7 @@ function keyPressed() {
     b = 0;
     a = speed;
   }
-
+/*
   if (keyCode === 83) {
     b1 = speed;
     a1 = 0;
@@ -124,13 +125,14 @@ function keyPressed() {
     b1 = 0;
     a1 = speed;
   }
+  */
 }
 
 function collisionCheck() {
   //checks if the ghost is touching pacman using distance formula
   if (sqrt((x - x1) * (x - x1) + (y - y1) * (y - y1)) < d) {
 
-    //resets player position and notifies them
+    //resets player position on game end and notifies them
     x = random(0, width);
     y = random(0, height);
     x1 = random(0, width);
