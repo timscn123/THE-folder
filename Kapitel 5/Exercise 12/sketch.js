@@ -4,6 +4,6 @@ function setup() {
   line(0, height / 2, width, height / 2);
   rectMode(CENTER);
   for (let i = 0; i < 10; i++) {
-    rect(i * 80 + 50, height / 2, 50, 10);
+    rect(i * 100 + 60, height / 2, 80, 60);
   }
 }
