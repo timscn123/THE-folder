@@ -23,6 +23,8 @@ function setup() {
     }
   }
 
+  textSize(15);
+
   for (let i = 0; i < unevenNumbers.length; i++) {
     text(
       unevenNumbers[i],
