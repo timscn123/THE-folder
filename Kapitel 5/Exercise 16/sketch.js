@@ -1,6 +1,5 @@
 let x = 0;
 let y = 0;
-let fontSize = 0;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -17,11 +16,9 @@ function setup() {
     "Olivia",
     "Alfred",
   ];
-  console.log(navne);
 
   for (let i = 0; i < navne.length; i++) {
-    fontSize = navne[i].length * 6;
-    textSize(fontSize);
+    textSize(navne[i].length * 6);
     text(navne[i], random(50, windowWidth - 50), random(50, windowHeight - 50));
   }
 }
