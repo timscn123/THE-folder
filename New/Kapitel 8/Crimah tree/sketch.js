@@ -1,4 +1,4 @@
-let t1, b1;
+;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -64,7 +64,6 @@ class Baubel {
       fill(0, 0, 255);
     }
 
-    //fill(255, 0, 0);
     circle(this.xpos, this.ypos, this.radius);
   }
 }
