@@ -1,18 +1,15 @@
 let xShow, yShow;
-let x1, x2;
+let x0, x1;
 let iterate;
 let a = 0.01,
   b = 0,
   c = 0;
-  
-let a2,
-  b2,
-  c2;
+
+let a2, b2;
 
 let lina = 1,
   linb = 1,
-  lina1 = 0,
-  linb1 = 0;
+  lina1 = 0;
 
 let inputa, inputb, inputc, button, inputa1, inputb1, button1;
 let graph, linGraph;
@@ -49,7 +46,9 @@ function setup() {
   button1.mousePressed(parseTextLinear);
 
   graph = new Graph("quadratic");
+  diff(graph.type);
   linGraph = new Graph("linear");
+  diff(linGraph.type);
 
   rectMode(CENTER);
 }
@@ -92,12 +91,16 @@ function parseText() {
   b = parseFloat(inputb.value());
   c = parseFloat(inputc.value());
   graph.setValues(a, b, c);
+  diff(graph.type);
 }
+
 function parseTextLinear() {
   lina = parseFloat(inputa1.value());
   linb = parseFloat(inputb1.value());
   linGraph.setValues(lina, linb);
+  diff(linGraph.type);
 }
+
 class Graph {
   constructor(type) {
     this.a = 0;
@@ -140,6 +143,16 @@ class Graph {
   }
 }
 
-function newtonRaphson() {
+function diff() {
+  a2 = b;
+  b2 = c;
+  lina1 = linb;
+}
 
+function newtonRaphson(a, b, c, a1, b1, guess, precision, macRuns) {
+  for (let i = 0; i < maxRuns; i++) {
+    if (Math.abs(graph.calcY - linGraph.calcYLinear) < precision) {
+      return x0;
+    }
+  }
 }
